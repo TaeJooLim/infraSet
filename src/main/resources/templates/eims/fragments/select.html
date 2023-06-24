@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<!--CSS-->
+<!--SCRIPT-->
+<!--CONTENT-->
+<th:block th:fragment="select">
+    <div class="">
+        <div class="">
+            <button class="" type="button" onclick="fn_selectListEntity()">엔티티다건조회</button>
+            <button class="" type="button" id="depBtn02">배포</button>
+            <button class="" type="button" id="delBtn02">삭제</button>
+        </div>
+        <table class="" id="grid02">
+            <thead>
+                <th><input type="checkbox" name="" id="chkAll"></th>
+                <th>엔티티ID</th>
+                <th>물리명</th>
+                <th>논리명</th>
+                <th>등록자ID</th>
+                <th>등록시간</th>
+                <th>수정자ID</th>
+                <th>수정시간</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="">
+        <div class="">
+            <button class="" type="button" onclick="">수정</button>
+            <button class="" type="button" onclick="">삭제</button>
+        </div>
+        <table class="" id="grid03">
+            <thead>
+                <th>물리명</th>
+                <th>논리명</th>
+                <th>자료형</th>
+                <th>참조타입</th>
+                <th>등록자ID</th>
+                <th>등록시간</th>
+                <th>수정자ID</th>
+                <th>수정시간</th>
+                <th>삭제</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</th:block>
+</html>

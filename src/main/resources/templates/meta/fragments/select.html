@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<!--CSS-->
+<!--SCRIPT-->
+<!--CONTENT-->
+<th:block th:fragment="select">
+    <div class="">
+        <button class="" type="button" onclick="fn_selectListTmMetaTerm()">메타용어다건조회</button>
+        <select class="" id="aprvYn">
+            <option value="Y">결재완료</option>
+            <option value="N">결재대기</option>
+        </select>
+        <button class="" type="button" onclick="fn_deleteListTmMetaTerm()">선택삭제</button>
+    </div>
+    <table class="" id="grid01">
+        <thead>
+            <th><input type="checkbox" name="" id="chkAll"></th>
+            <th>물리명</th>
+            <th>자료형</th>
+            <th>논리명</th>
+            <th>일련번호</th>
+            <th>길이</th>
+            <th>소숫점길이</th>
+            <th>결재여부</th>
+            <th>결재요청자ID</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+</th:block>
+</html>

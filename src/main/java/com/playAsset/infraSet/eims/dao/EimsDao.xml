@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.playAsset.infraSet.eims.dao.EimsDao">
+    <!-- EIMS 엔티티 등록 -->
+    <insert id="insertEntity" parameterType="com.playAsset.infraSet.eims.dto.EimsDto">
+        INSERT INTO TM_EIMS_ENTITY (
+            ENTITY_ID
+            , ENTITY_PHY_NM
+            , ENTITY_LOG_NM
+            , ENTITY_PACKAGE_NM
+            , REG_ID
+            , REG_DTM
+            , UDT_ID
+            , UDT_DTM
+        ) VALUES (
+            #{entityId}
+            , #{entityPhyNm}
+            , #{entityLogNm}
+            , #{entityPackageNm}
+            , #{userId}
+            , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+            , #{userId}
+            , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+        )
+    </insert>
+
+    <!-- EIMS 엔티티필드 등록 -->
+    <insert id="insertEntityField" parameterType="com.playAsset.infraSet.eims.dto.EimsFieldDto">
+        INSERT INTO TM_EIMS_ENTITY_FIELD (
+            ENTITY_ID
+            , TERM_PHY_NM
+            , TERM_LOG_NM
+            , TERM_DATA_TYPE
+            , ENTITY_REF_TYPE
+            , REG_ID
+            , REG_DTM
+            , UDT_ID
+            , UDT_DTM
+        ) VALUES (
+            #{entityId}
+            , #{termPhyNm}
+            , #{termLogNm}
+            , #{termDataType}
+            , #{entityRefType}
+            , #{userId}
+            , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+            , #{userId}
+            , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+        )
+    </insert>
+
+    <!-- EIMS 엔티티 ID 최대값 조회-->
+    <select id="selectMaxEimsEntityId" resultType="String">
+        SELECT
+            IFNULL(MAX(CONVERT(ENTITY.ENTITY_ID, UNSIGNED)), 1)
+        FROM TM_EIMS_ENTITY ENTITY
+    </select>
+
+    <!-- EIMS 엔티티 단건조회 -->
+    <select id="selectOneEntity" parameterType="com.playAsset.infraSet.eims.dto.EimsDto" resultType="com.playAsset.infraSet.eims.dto.EimsDto">
+        SELECT
+            ENTITY_ID AS entityId
+            , ENTITY_PHY_NM AS entityPhyNm
+            , ENTITY_LOG_NM AS entityLogNm
+            , ENTITY_PACKAGE_NM AS entityPackageNm
+            , REG_ID AS regId
+            , REG_DTM AS regDtm
+            , UDT_ID AS udtId
+            , UDT_DTM AS udtDtm
+        FROM TM_EIMS_ENTITY
+        WHERE ENTITY_ID = #{entityId}
+    </select>
+
+    <!-- EIMS 엔티티 다건조회 -->
+    <select id="selectListEntity" resultType="com.playAsset.infraSet.eims.dto.EimsDto">
+        SELECT
+            ENTITY_ID AS entityId
+            , ENTITY_PHY_NM AS entityPhyNm
+            , ENTITY_LOG_NM AS entityLogNm
+            , ENTITY_PACKAGE_NM AS entityPackageNm
+            , REG_ID AS regId
+            , REG_DTM AS regDtm
+            , UDT_ID AS udtId
+            , UDT_DTM AS udtDtm
+        FROM TM_EIMS_ENTITY
+    </select>
+
+    <!-- EIMS 엔티티필드 다건조회 -->
+    <select id="selectListFieldEntity" parameterType="String" resultType="com.playAsset.infraSet.eims.dto.EimsFieldDto">
+        SELECT
+            ENTITY_ID AS entityId
+            , TERM_PHY_NM AS termPhyNm
+            , TERM_LOG_NM AS termLogNm
+            , TERM_DATA_TYPE AS termDataType
+            , ENTITY_REF_TYPE AS entityRefType
+            , REG_ID AS regId
+            , REG_DTM AS regDtm
+            , UDT_ID AS udtId
+            , UDT_DTM AS udtDtm
+        FROM TM_EIMS_ENTITY_FIELD FIELD
+        WHERE FIELD.ENTITY_ID = #{entityId}
+    </select>
+
+    <!-- EIMS 엔티티필드 단건삭제 -->
+    <delete id="deleteEntityField" parameterType="com.playAsset.infraSet.eims.dto.EimsFieldDto">
+        DELETE
+        FROM TM_EIMS_ENTITY_FIELD
+        WHERE ENTITY_ID = #{entityId} AND TERM_PHY_NM = #{termPhyNm}
+    </delete> 
+</mapper>

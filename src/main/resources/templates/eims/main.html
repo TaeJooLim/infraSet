@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/common.css}" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<body>
+    <h1>EIMS</h1>
+    <div class="">
+        <div class="">
+            <div class="">
+                <button class="" id="tabBtn1"  type="button" onclick="fn_clickTabMenu(this.id)">I/O 조회/삭제</button>
+                <button class="" id="tabBtn2" type="button" onclick="fn_clickTabMenu(this.id)">I/O 수정/배포</button>
+                <button class="" id="tabBtn3" type="button" onclick="fn_clickTabMenu(this.id)">I/O등록</button>
+                <button class="" id="tabBtn4" type="button" onclick="fn_clickTabMenu(this.id)">EIMS 시뮬레이터</button>
+            </div>
+        </div>
+        <div class="">
+            <div id="tab1" class="tab">
+                <th:block th:replace="/eims/fragments/select :: select"></th:block>
+            </div>
+            <!-- <div id="tab2" class="tab off">
+                <th:block th:replace="/meta/fragments/insert :: insert"></th:block>
+            </div> -->
+            <div id="tab3" class="tab off">
+                <th:block th:replace="/eims/fragments/create :: create"></th:block>
+            </div>
+        </div>
+    </div>
+</body>
+<script th:src="@{/js/common.js}" ></script>
+<script th:src="@{/js/eims.js}" ></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // 메타용어다건조회
+        fn_selectListMetaTerm();
+    });
+
+
+</script>
+</html>

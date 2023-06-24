@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<!--CSS-->
+<!--SCRIPT-->
+<!--CONTENT-->
+<th:block th:fragment="create">
+    <div class="">
+        <button type="button" class="" id="regBtn01">엔티티생성</button>
+        <button type="button" class="" id="addBtn01" onclick="fn_changeFieldLine(this.id)">+</button>
+        <button type="button" class="" id="delBtn01" onclick="fn_changeFieldLine(this.id)">-</button>
+    </div>
+    <div class="">
+        <div class="">
+            <label for="" class="">물리명검색</label>
+            <input type="text" class="" id="input01" placeholder="물리명을 입력해주세요." />
+            <div class="" id="datalist01"></div>
+        </div>
+        <form class="" id="frm01" action="" method="">
+            <div class="">
+                <input type="text" name="entityPhyNm" placeholder="엔티티 물리명을 입력해주세요." />
+                <input type="text" name="entityLogNm" placeholder="엔티티 논리명을 입력해주세요." />
+                <input type="text" name="entityPackageNm" placeholder="엔티티 패키지명을 입력해주세요." />
+            </div>
+            <div class="">
+                <table class="" id="grid01">
+                    <thead>
+                        <th>물리명</th>
+                        <th>논리명</th>
+                        <th>자료형</th>
+                        <th>길이</th>
+                        <th>소숫점길이</th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.playAsset.infraSet.meta.dao.MetaDao">
+    <!-- 테이블명 다건조회 -->
+    <select id="selectListTableName" resultType="String">
+        SHOW TABLES
+    </select>
+
+    <!-- 테이블별 필드정보 다건조회 -->
+    <select id="selectListFieldInfo" parameterType="String" resultType="com.playAsset.infraSet.meta.dto.TableFieldDto">
+        SHOW FULL COLUMNS FROM ${tableName}
+    </select>
+
+    <!-- 메타 시퀀스 조회 -->
+    <select id="selectMetaWordSeqInq" resultType="int">
+        SELECT COUNT(*) + 1 FROM TM_META_TERM
+    </select>
+
+    <!-- 메타용어 테이블 등록 -->
+    <insert id="insertMetaWord" parameterType="com.playAsset.infraSet.meta.dto.MetaTermDto">
+        INSERT INTO TM_META_TERM 
+        SET 
+            PHY_NM = #{phyNm},
+            DATA_TYPE = #{dataType},
+            LOG_NM = #{logNm},
+            TERM_SEQ = ${termSeq},
+            DATA_LENGTH = #{dataLength},
+            DATA_DECIMAL = #{dataDecimal},
+            APRV_YN = 'N',
+            APRV_REQ_ID = #{aprvReqId},
+            REG_ID = #{userId},
+            REG_DTM = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'),
+            UDT_ID = #{userId},
+            UDT_DTM = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+    </insert>
+
+    <!-- 메타용어 결재여부 수정 -->
+    <update id="updateApprovalAllMetaTerm" parameterType="com.playAsset.infraSet.meta.dto.MetaTermDto">
+        UPDATE TM_META_TERM
+        SET
+            APRV_YN = 'Y',
+            APRV_REQ_ID = #{aprvReqId},
+            APRV_DTM = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s'),
+            UDT_ID = #{userId},
+            UDT_DTM = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+        WHERE APRV_YN = 'N'
+    </update>
+
+    <!-- 메타용어 다건조회 -->
+    <select id="selectListTmMetaTerm" parameterType="com.playAsset.infraSet.meta.dto.MetaTermDto" resultType="com.playAsset.infraSet.meta.dto.MetaTermDto">
+        SELECT
+            PHY_NM AS phyNm
+            , MT.DATA_TYPE AS dataType
+            , MT.LOG_NM AS logNm
+            , MT.TERM_SEQ AS termSeq
+            , MT.DATA_LENGTH AS dataLength
+            , MT.DATA_DECIMAL AS dataDecimal
+            , MT.APRV_YN AS aprvYn
+            , MT.APRV_REQ_ID AS aprvReqId
+            , MT.APRV_DTM AS aprvDtm
+            , MT.REG_ID AS regId
+            , MT.REG_DTM AS regDtm
+            , MT.UDT_ID AS udtId
+            , MT.UDT_DTM AS udtDtm
+        FROM TM_META_TERM MT
+        WHERE 1=1
+        <if test="aprvYn != null">AND APRV_YN = #{aprvYn}</if>
+        ORDER BY MT.TERM_SEQ ASC
+    </select>
+
+    <!-- 메타용어 단건삭제 -->
+    <delete id="deleteTmMetaTerm" parameterType="String">
+        DELETE
+        FROM TM_META_TERM MT
+        WHERE MT.TERM_SEQ = ${termSeq}
+    </delete>
+
+    <!-- 테이블 생성 -->
+    <select id="createTable" parameterType="map">
+        ${executeQueryString}
+    </select>
+</mapper>

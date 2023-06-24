@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<!--CSS-->
+<!--SCRIPT-->
+<!--CONTENT-->
+<th:block th:fragment="create">
+    <div class="">
+        <button type="button" class="" id="insertBtn" onclick="fn_createTable()">테이블생성</button>
+        <button type="button" class="" id="addBtn02" onclick="fn_changeFieldLine(this.id)">+</button>
+        <button type="button" class="" id="delBtn02" onclick="fn_changeFieldLine(this.id)">-</button>
+    </div>
+    <div class="">
+        <form class="" id="frm02" action="" method="">
+            <div class="">
+                <input type="text" name="tableNm" placeholder="테이블명을 입력해주세요." />
+                <input type="text" name="tableComment" placeholder="테이블 설명을 입력해주세요." />
+            </div>
+            <table class="" id="grid03">
+                <thead>
+                    <th>컬럼명</th>
+                    <th>데이터타입</th>
+                    <th>길이</th>
+                    <th>COMMENT</th>
+                    <th>NOT NULL</th>
+                    <th>PK</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</th:block>
+</html>

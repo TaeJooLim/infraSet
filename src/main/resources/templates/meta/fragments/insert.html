@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<!--CSS-->
+<!--SCRIPT-->
+<!--CONTENT-->
+<th:block th:fragment="insert">
+    <div class="">
+        <button type="button" class="" id="insertBtn" onclick="fn_insertMetaTerm()">메타등록</button>
+        <button type="button" class="" id="addBtn01" onclick="fn_changeLine(this.id)">+</button>
+        <button type="button" class="" id="delBtn01" onclick="fn_changeLine(this.id)">-</button>
+    </div>
+    <div class="">
+        <form class="" id="frm01" action="" method="">
+            <table class="" id="grid02">
+                <thead>
+                    <th>물리명</th>
+                    <th>자료형</th>
+                    <th>논리명</th>
+                    <th>길이</th>
+                    <th>소숫점길이</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</th:block>
+</html>
